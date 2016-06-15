@@ -39,13 +39,13 @@ public class Graph {
             throw new IndexOutOfBoundsException("vertex " + v + " is not between 0 and " + (V-1));
     }
 
-    public void addEdge(int b, int e){
-        validateVertex(b);
-        validateVertex(e);
+    public void addEdge(int be, int ee){
+        validateVertex(be);
+        validateVertex(ee);
         e++;
         //add both direction
-        adj[b].add(e);
-        adj[e].add(b);
+        adj[be].add(ee);
+        adj[ee].add(be);
     }
 
     public Iterable<Integer> adj(int v){
@@ -78,7 +78,7 @@ public class Graph {
             }
         }
 
-        return count;
+        return count/2;
     }
 
     public String toString(){
