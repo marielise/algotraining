@@ -25,6 +25,14 @@ public class Graph {
         }
     }
 
+    public Graph(Scanner in){
+        this(in.nextInt());
+        int edNb = in.nextInt();
+        for(int i = 0; i < edNb; i++) {
+            addEdge(in.nextInt(), in.nextInt());
+        }
+    }
+
     public int V(){
         return V;
     }
