@@ -1,5 +1,7 @@
 package com.main;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -104,16 +106,17 @@ public class Graph {
 
 
     public static void main(String [] args) {
-        Scanner in = new Scanner(System.in);
-        int v = in.nextInt();
-        int e = in.nextInt();
-        Graph g = new Graph(v);
-
-        for(int i = 0; i < e; i++){
-            int eb = in.nextInt();
-            int ee = in.nextInt();
-            g.addEdge(eb,ee);
+        ClassLoader classLoader = Graph.class.getClassLoader();
+        File file = new File(classLoader.getResource("tinyG.txt").getFile());
+        try {
+            Scanner in = new Scanner(file);
+            Graph g = new Graph(in);
+            System.out.println(g.toString());
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
         }
+
+
     }
 
     /**
