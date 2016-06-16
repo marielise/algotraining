@@ -5,5 +5,8 @@ package com.main;
  */
 public class BreadFirstSearch {
 
+    private boolean []visited;
+
+
 
 }
