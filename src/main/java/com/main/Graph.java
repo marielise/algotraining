@@ -99,6 +99,7 @@ public class Graph {
             for(Integer ed:adj(i)) {
                 str.append(ed).append(" ");
             }
+            str.append("\n");
         }
 
         return str.toString();
