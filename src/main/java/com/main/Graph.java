@@ -69,7 +69,7 @@ public class Graph {
 
     public static int maxDegree(Graph g){
         int maxDeg = 0;
-        for(int i = 0; i < g.adj.length; i++){
+        for(int i = 0; i < g.V(); i++){
             int dg = g.degree(i);
             if(dg > maxDeg){
                 maxDeg = dg;
@@ -80,7 +80,7 @@ public class Graph {
 
     public static int countSelfLoops(Graph g){
         int count = 0;
-        for(int i = 0; i < g.adj.length; i++){
+        for(int i = 0; i < g.V(); i++){
             for(int v: g.adj(i)){
                 if (i == v){
                     count++;

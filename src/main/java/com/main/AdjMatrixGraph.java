@@ -1,6 +1,7 @@
 package com.main;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -50,7 +51,7 @@ public class AdjMatrixGraph {
     }
 
     public Iterable<Integer> adj(int v){
-        return new MatrixIterator(matrix[v]);
+        return new MatrixIterator(v);
     }
 
     public int degree(int b){
@@ -61,6 +62,30 @@ public class AdjMatrixGraph {
             if (a) count++;
         }
 
+        return count;
+    }
+
+    public static int maxDegree(AdjMatrixGraph g){
+        int maxDeg = 0;
+        for(int i = 0; i < g.V(); i++){
+            int dg = g.degree(i);
+            if(dg > maxDeg){
+                maxDeg = dg;
+            }
+        }
+        return maxDeg;
+    }
+
+    public static int countSelfLoops(AdjMatrixGraph g){
+        int count = 0;
+        for(int i = 0; i < g.V(); i++){
+            for(int v: g.adj(i)){
+                if (i == v){
+                    count++;
+                }
+            }
+        }
+        //only once
         return count;
     }
 
@@ -88,14 +113,19 @@ public class AdjMatrixGraph {
         public boolean hasNext() {
 
             while (w < V) {
-
+                if(matrix[v][w])
+                    return true;
+                w++;
             }
-            return i < v;
+            return false;
         }
 
         @Override
         public Integer next() {
-            return vect[i++];
+            if(!hasNext()){
+                throw new NoSuchElementException();
+            }
+            return w++;
         }
 
         @Override
