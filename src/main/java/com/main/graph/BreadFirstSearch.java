@@ -5,6 +5,7 @@ import java.util.Queue;
 
 /**
  * Created by mlhamel on 6/13/16.
+ * Non recursive method
  */
 public class BreadFirstSearch extends Search {
 
