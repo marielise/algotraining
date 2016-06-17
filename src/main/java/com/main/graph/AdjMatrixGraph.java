@@ -1,4 +1,4 @@
-package com.main;
+package com.main.graph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
