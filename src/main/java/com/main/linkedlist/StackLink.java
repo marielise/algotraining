@@ -1,4 +1,4 @@
-package com.main;
+package com.main.linkedlist;
 
 /**
  * Created by mlhamel on 2/3/16.
