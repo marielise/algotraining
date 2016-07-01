@@ -30,6 +30,7 @@ public class SelectionSort {
                 }
             }
             swap(a,index,lastMin);
+            assert isSorted(a, 0, index);
             index++;
         }
 
@@ -44,6 +45,8 @@ public class SelectionSort {
      */
     public static void sort(Object[] a, Comparator c) {
 
+
+        //assert isSorted(a, c, 0, index);
     }
 
     /***************************************************************************
@@ -99,6 +102,10 @@ public class SelectionSort {
 
     // print array to standard output
     private static void show(Comparable[] a) {
+
+    }
+
+    public static void main(String[] args) {
 
     }
 }
