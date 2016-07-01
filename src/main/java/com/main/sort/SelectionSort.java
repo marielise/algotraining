@@ -5,7 +5,7 @@ import java.util.Comparator;
 /**
  * First, find the smallest item in the array, and exchange it with the first entry.
  */
-public class SelectionSort {
+public class SelectionSort extends  Sort {
 
     /**
      * Rearranges the array in ascending order, using the natural order.
@@ -49,61 +49,7 @@ public class SelectionSort {
         //assert isSorted(a, c, 0, index);
     }
 
-    /***************************************************************************
-     *  Helper sorting functions.
-     ***************************************************************************/
 
-    // is v < w ?
-    private static boolean less(Comparable v, Comparable w) {
-        return v.compareTo(w) < 0;
-    }
-
-    // is v < w ?
-    private static boolean less(Comparator c, Object v, Object w) {
-        return c.compare(v, w) < 0;
-    }
-
-    private static void swap(Object []a, int i, int j){
-        Object tmp = a[i];
-        a[i] = a[j];
-        a[j] = tmp;
-    }
-
-    /*=====================================================
-        Checking tools
-     */
-
-
-    private static boolean isSorted(Comparable[] a) {
-        if (a.length < 2)
-            return true;
-
-        Comparable prev = a[0];
-        for(int i = 1; i < a.length; i++){
-                if(!less(prev, a[i])) return false;
-            prev = a[i];
-        }
-        return true;
-    }
-
-    private static boolean isSorted(Comparable[] a, int lo, int hi) {
-        return false;
-    }
-
-    // is the array a[] sorted?
-    private static boolean isSorted(Object[] a, Comparator c) {
-        return false;
-    }
-
-    // is the array sorted from a[lo] to a[hi]
-    private static boolean isSorted(Object[] a, Comparator c, int lo, int hi) {
-        return false;
-    }
-
-    // print array to standard output
-    private static void show(Comparable[] a) {
-
-    }
 
     public static void main(String[] args) {
 
