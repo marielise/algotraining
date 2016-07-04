@@ -33,37 +33,31 @@ public class Sort {
 
 
     public static boolean isSorted(Comparable[] a) {
-        if (a.length < 2)
-            return true;
-
-        for(int i = 0; i < a.length-1; i++){
-            if(!less(a[i], a[i+1])) return false;
-        }
-        return true;
+        return isSorted(a,0,a.length-1);
     }
 
     public static boolean isSorted(Comparable[] a, int lo, int hi) {
-        return false;
+        for (int i = lo + 1; i <= hi; i++)
+            if (less(a[i], a[i-1])) return false;
+        return true;
     }
 
     // is the array a[] sorted?
     public static boolean isSorted(Object[] a, Comparator c) {
-        if (a.length < 2)
-            return true;
-
-        for(int i = 0; i < a.length-1; i++){
-            if(!less(c, a[i], a[i+1])) return false;
-        }
-        return true;
+        return isSorted(a, c, 0, a.length - 1);
     }
 
     // is the array sorted from a[lo] to a[hi]
     public static boolean isSorted(Object[] a, Comparator c, int lo, int hi) {
-        return false;
+        for (int i = lo + 1; i <= hi; i++)
+            if (less(c, a[i], a[i-1])) return false;
+        return true;
     }
 
     // print array to standard output
     public static void show(Comparable[] a) {
-
+        for (int i = 0; i < a.length; i++) {
+            System.out.println(a[i]);
+        }
     }
 }

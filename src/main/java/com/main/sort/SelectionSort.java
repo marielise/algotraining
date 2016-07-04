@@ -46,7 +46,29 @@ public class SelectionSort extends  Sort {
     public static void sort(Object[] a, Comparator c) {
 
 
-        //assert isSorted(a, c, 0, index);
+        if (a == null)
+            return;
+        int N = a.length;
+
+        if(N < 2) {
+            return;
+        }
+
+        int index = 0;
+
+        while(index < N) {
+            int lastMin = index;
+            for (int i = index +1; i < N; i++) {
+                if(!less(c, a[lastMin], a[i])){
+                    lastMin = i;
+                }
+            }
+            swap(a,index,lastMin);
+            assert isSorted(a,c, 0, index);
+            index++;
+        }
+
+        assert isSorted(a, c);
     }
 
 
