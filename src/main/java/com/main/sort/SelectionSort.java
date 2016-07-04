@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 /**
  * First, find the smallest item in the array, and exchange it with the first entry.
+ * N^2/2 compares
  */
 public class SelectionSort extends  Sort {
 
