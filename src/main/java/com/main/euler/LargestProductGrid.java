@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 /**
  * Created by mlhamel on 7/5/16.
+ *
+ * Project Euler 11
+ * From HackerRanck
+ *
  * In the 20×20 grid below, four numbers along a diagonal line
  89 90 95 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
  49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
@@ -41,7 +45,7 @@ import java.util.Scanner;
  * For this grid : out  =
  * 73812150
  */
-public class LargeProductGrid {
+public class LargestProductGrid {
 
     private static int NB = 4;
     private static int GS = 20;
@@ -55,10 +59,10 @@ public class LargeProductGrid {
 
         while(in.hasNextInt()) {
             matrix[i][j] = in.nextInt();
-            i++;
-            if(i >= GS ){
-                i = 0;
-                j++;
+            j++;
+            if(j >= GS ){
+                j = 0;
+                i++;
             }
         }
 
@@ -74,30 +78,31 @@ public class LargeProductGrid {
                 //right
                 max = Math.max(computeProduct(r,c,0,1, matrix), max);
                 //down
-                max = Math.max(computeProduct(r,c,0,1, matrix), max);
+                max = Math.max(computeProduct(r,c,1,0, matrix), max);
                 //diag down
-                max = Math.max(computeProduct(r,c,0,1, matrix), max);
+                max = Math.max(computeProduct(r,c,1,1, matrix), max);
                 //diag up
-                max = Math.max(computeProduct(r,c,0,1, matrix), max);
+                max = Math.max(computeProduct(r,c,-1,1, matrix), max);
             }
         }
 
         System.out.println(max);
     }
 
-    public static boolean inBound (int r, int c, int dx, int dy){
-
-
-
-        return false;
+    public static boolean inBound (int r, int c){
+        if(r < 0 || r >= GS || c < 0 || c >= GS)
+            return false;
+        return true;
     }
 
     public static int computeProduct(int r, int c, int dr, int dc, int [][]matrix){
-        if(!inBound(r,c,dr,dc)) return -1;
+        //check largest position in grid
+        if(!inBound(r + dr*(NB-1),c + dc * (NB-1))) return -1;
+
         int prod = 1;
 
-        for(int i = 0; i < NB; i++){
-            prod *= matrix[r][c];
+        for(int k = 0; k < NB; k++){
+            prod *= matrix[r + k * dr][c + k * dc];
         }
 
         return prod;
