@@ -1,8 +1,8 @@
 package com.main.euler;
 
 import java.util.BitSet;
-import java.util.IntSummaryStatistics;
 import java.util.Scanner;
+import java.util.TreeSet;
 import java.util.stream.IntStream;
 
 /**
@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
  The next  lines will contains an integer .
 
  Output Format
- Print the value corresponding to each test case in seperate line.
+ Print the value corresponding to each test case in separate line.
 
  Constraint
  1 <= T <= 10^4
@@ -32,6 +32,9 @@ import java.util.stream.IntStream;
  Out
  10
  17
+
+ Maths:
+ 0 and 1 are not primes numbers
 
  python solution timeout
  def _prime_sieve_eratosthenes(n):
@@ -53,23 +56,69 @@ public class PrimesSummation {
     private static final int limit = 1_000_000;
     private static BitSet sieve = new BitSet(limit+1);
 
+    private static TreeSet<Prime> sumSet = new TreeSet();
+
+    private static int lastEnd = 2;
+    private static int lastSum = 0;
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+        int testNb = in.nextInt();
 
-        computePrimesOfEratosthenes(0,0);
+        computePrimesOfEratosthenesWithBitSet(2,0);
     }
 
-    public static void computePrimesOfEratosthenes(int begin, int end){
+    /**
+     *
+     * @param begin
+     * @param end
+     */
+    public static void computePrimesOfEratosthenesWithBitSet(int begin, int end){
 
-        final IntSummaryStatistics stats = IntStream.rangeClosed(2, limit)
+         IntStream.rangeClosed(begin, end)
                 .filter(x -> !sieve.get(x))
                 .peek(x -> {
-                    if ((long)x*x < limit)
-                        for(long i = x*x; i <= limit; i+=x)
+                    //manage sum
+                    lastSum += x;
+                    sumSet.add(new Prime(x,lastSum));
+                    if ((long)x*x < end)
+                        for(long i = x*x; i <= end; i+=x)
                             sieve.set((int)i);
-                })
-                .summaryStatistics();
-        System.out.printf("%d", stats.getCount(), stats.getSum());
+                });
+
     }
 
+    public static class Prime implements Comparable<Prime> {
+        private int prime;
+        private int sumOfPrime;
+
+        public Prime(int prime, int sum){
+            this.prime = prime;
+            this.sumOfPrime = sum;
+        }
+
+        @Override
+        public int compareTo(Prime o) {
+            if (this.getPrime() < o.getPrime()) return -1;
+            if (this.getPrime() > o.getPrime()) return 1;
+
+            return 0;
+        }
+
+        public int getPrime() {
+            return prime;
+        }
+
+        public void setPrime(int prime) {
+            this.prime = prime;
+        }
+
+        public int getSumOfPrime() {
+            return sumOfPrime;
+        }
+
+        public void setSumOfPrime(int sumOfPrime) {
+            this.sumOfPrime = sumOfPrime;
+        }
+    }
 }
