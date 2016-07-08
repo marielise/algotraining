@@ -58,14 +58,24 @@ public class PrimesSummation {
 
     private static TreeSet<Prime> sumSet = new TreeSet();
 
-    private static int lastEnd = 2;
+    private static int begin = 2;
+    private static int lastEnd = 0;
     private static int lastSum = 0;
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int testNb = in.nextInt();
-
-        computePrimesOfEratosthenesWithBitSet(2,0);
+        while(0 < testNb--) {
+            int end = in.nextInt();
+            if(lastEnd < end) {
+                computePrimesOfEratosthenesWithBitSet(begin, end);
+                lastEnd = end;
+                begin = end;
+            }
+            Prime p = new Prime(end, 0);
+            Prime psum = sumSet.ceiling(p);
+            System.out.println(psum.getSumOfPrime());
+        }
     }
 
     /**
