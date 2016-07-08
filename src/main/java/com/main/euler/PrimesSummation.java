@@ -69,12 +69,14 @@ public class PrimesSummation {
             int end = in.nextInt();
             if(lastEnd < end) {
                 computePrimesOfEratosthenesWithBitSet(begin, end);
+                System.out.println(lastSum);
                 lastEnd = end;
                 begin = end+1;
+            } else {
+                Prime p = new Prime(end, 0);
+                Prime psum = sumSet.ceiling(p);
+                System.out.println(psum.getSumOfPrime());
             }
-            Prime p = new Prime(end, 0);
-            Prime psum = sumSet.ceiling(p);
-            System.out.println(psum.getSumOfPrime());
         }
     }
 
@@ -90,10 +92,10 @@ public class PrimesSummation {
                 .peek(x -> {
                     //manage sum
                     lastSum += x;
-                    sumSet.add(new Prime(x,lastSum));
-                    if ((long)x*x < limit)
-                        for(long i = x*x; i <= limit; i+=x)
-                            sieve.set((int)i);
+                    sumSet.add(new Prime(x, lastSum));
+                    if ((long) x * x < limit)
+                        for (long i = x * x; i <= limit; i += x)
+                            sieve.set((int) i);
                 }).summaryStatistics();
 
     }
