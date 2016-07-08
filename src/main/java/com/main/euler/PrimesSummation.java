@@ -70,7 +70,7 @@ public class PrimesSummation {
             if(lastEnd < end) {
                 computePrimesOfEratosthenesWithBitSet(begin, end);
                 lastEnd = end;
-                begin = end;
+                begin = end+1;
             }
             Prime p = new Prime(end, 0);
             Prime psum = sumSet.ceiling(p);
@@ -91,10 +91,10 @@ public class PrimesSummation {
                     //manage sum
                     lastSum += x;
                     sumSet.add(new Prime(x,lastSum));
-                    if ((long)x*x < end)
-                        for(long i = x*x; i <= end; i+=x)
+                    if ((long)x*x < limit)
+                        for(long i = x*x; i <= limit; i+=x)
                             sieve.set((int)i);
-                });
+                }).summaryStatistics();
 
     }
 
