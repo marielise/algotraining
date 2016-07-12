@@ -60,23 +60,29 @@ public class PrimesSummation {
 
     private static int begin = 2;
     private static int lastEnd = 0;
-    private static int lastSum = 0;
+    private static long lastSum = 0;
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int testNb = in.nextInt();
         while(0 < testNb--) {
             int end = in.nextInt();
-            if(lastEnd < end) {
-                computePrimesOfEratosthenesWithBitSet(begin, end);
-                System.out.println(lastSum);
-                lastEnd = end;
-                begin = end+1;
-            } else {
-                Prime p = new Prime(end, 0);
-                Prime psum = sumSet.ceiling(p);
-                System.out.println(psum.getSumOfPrime());
-            }
+             long result = solve(end);
+            System.out.println(result);
+        }
+    }
+
+    public static long solve(int end){
+        if(lastEnd < end) {
+            computePrimesOfEratosthenesWithBitSet(begin, end);
+            lastEnd = end;
+            begin = end+1;
+            return lastSum;
+
+        } else {
+            Prime p = new Prime(end, 0);
+            Prime psum = sumSet.floor(p);
+            return psum.getSumOfPrime();
         }
     }
 
@@ -102,9 +108,9 @@ public class PrimesSummation {
 
     public static class Prime implements Comparable<Prime> {
         private int prime;
-        private int sumOfPrime;
+        private long sumOfPrime;
 
-        public Prime(int prime, int sum){
+        public Prime(int prime, long sum){
             this.prime = prime;
             this.sumOfPrime = sum;
         }
@@ -125,11 +131,11 @@ public class PrimesSummation {
             this.prime = prime;
         }
 
-        public int getSumOfPrime() {
+        public long getSumOfPrime() {
             return sumOfPrime;
         }
 
-        public void setSumOfPrime(int sumOfPrime) {
+        public void setSumOfPrime(long sumOfPrime) {
             this.sumOfPrime = sumOfPrime;
         }
     }
