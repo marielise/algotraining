@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 /**
  * Created by mlhamel on 7/11/16.
+ * array using Shellsort with Knuth's increment sequence (1, 4, 13, 40, ...).
  */
 public class ShellSort extends Sort {
 
@@ -28,6 +29,7 @@ public class ShellSort extends Sort {
         k--;
 
         while(h >=1) {
+            show(a, k, h + "-sorted");
             for(int i = h; i < n; i++) {
 
                 for(int j = i ; j >= h && less(a[j], a[j-h]); j -= h) {
@@ -40,7 +42,7 @@ public class ShellSort extends Sort {
                     }
                 }
             }
-            if (h < n) show(a, --k, h + "-sorted");
+            if (h < n) k--;
             h /=3;
         }
         assert isSorted(a);
@@ -48,9 +50,13 @@ public class ShellSort extends Sort {
 
     private static void showBars(Comparable[] a, int k, int i,int j){
         //paint white
-        //replace
-        //paint white
-        //replace
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.line(i, FF*k, i, FF*k + (double)a[j]*(FF-1));
+        StdDraw.line(j, FF*k, j, FF*k + (double)a[i]*(FF-1));
+        StdDraw.setPenColor(StdDraw.RED);
+        StdDraw.line(i, FF*k, i, FF*k + (double)a[i]*(FF-1));
+        StdDraw.line(j, FF*k, j, FF*k + (double)a[j]*(FF-1));
+        StdDraw.show();
     }
 
     private static void show(Comparable[] a, int k, String message) {
